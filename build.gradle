@@ -30,6 +30,7 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-devtools")
+    compile group: 'javax.mail', name: 'mail', version: '1.4.7'
     compile("com.fasterxml.jackson.core:jackson-databind")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
