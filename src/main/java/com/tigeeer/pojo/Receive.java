@@ -1,5 +1,7 @@
 package com.tigeeer.pojo;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * Created by tigeeer on 2016/10/9.
  */
@@ -9,6 +11,7 @@ public class Receive {
     private String title;
     private String content;
 
+    @NotEmpty
     public String getToMail() {
         return toMail;
     }
@@ -17,6 +20,7 @@ public class Receive {
         this.toMail = toMail;
     }
 
+    @NotEmpty
     public String getTitle() {
         return title;
     }
@@ -31,5 +35,14 @@ public class Receive {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Receive{" +
+                "toMail='" + toMail + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }
