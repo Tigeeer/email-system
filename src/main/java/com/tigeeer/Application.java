@@ -1,18 +1,33 @@
 package com.tigeeer;
 
-import com.tigeeer.pojo.Config;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tigeeer.pojo.MailMessage;
+import com.tigeeer.rabbitmq.MailListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
- * Created by tigeeer on 2016/10/10.
+ * Created by InteliJ IDEA.
+ * User: tigeeer
+ * Date: 12/12/2016
+ * Time: 12:54 AM
  */
 @SpringBootApplication
-@EnableConfigurationProperties(value = {Config.class})
-public class Application {
+public class Application implements CommandLineRunner {
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        MailMessage mailMessage = new MailMessage("1606088706@qq.com", "测试标题", "测试内容");
+        rabbitTemplate.convertAndSend(MailListener.EXCHANGE_NAME, MailListener.ROUTING_KEY, new ObjectMapper().writeValueAsString(mailMessage));
     }
 }

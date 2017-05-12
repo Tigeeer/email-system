@@ -1,0 +1,14 @@
+DROP DATABASE IF EXISTS mail;
+CREATE DATABASE mail;
+USE mail;
+
+DROP TABLE IF EXISTS records;
+CREATE TABLE records (
+  address VARCHAR(255) NOT NULL ,
+  title VARCHAR(255) NOT NULL ,
+  content VARCHAR(255) NOT NULL ,
+  completed BOOLEAN NOT NULL ,
+  reason VARCHAR(255) NOT NULL,
+  sendTime DATETIME NOT NULL,
+  PRIMARY KEY (address, sendTime)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
